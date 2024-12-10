@@ -1,0 +1,116 @@
+@extends('layouts.app')
+
+@section('title', 'Login - Sistem Absensi Guru')
+
+@section('content')
+<div class="login-container">
+    <!-- Logo Sekolah -->
+    <img src="/images/logoSD.png" alt="Logo Sekolah">
+
+    <!-- Judul Form -->
+    <h2>Sistem Absensi Guru</h2>
+
+    <!-- Form Login -->
+    <form action="{{ route('login.submit') }}" method="POST">
+        @csrf
+        <!-- Input untuk Username atau Email -->
+        <div class="input-icon">
+            <img src="/images/username.png" alt="Icon User">
+            <input type="text" name="username" placeholder="Username atau Email" required>
+        </div>
+
+        <!-- Input untuk Password -->
+        <div class="input-icon">
+            <img src="/images/password4.png" alt="Icon Password">
+            <input type="password" name="password" placeholder="Password" required>
+        </div>
+
+        <!-- Tombol Masuk -->
+        <button type="submit">Masuk</button>
+    </form>
+</div>
+<style>
+    body {
+        font-family: "Poppins", sans-serif;
+        background-color: #FFF9EB;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    /* Container form login */
+    .login-container {
+        background-color: #D6FBC5;
+        padding: 40px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 350px;
+    }
+
+    /* Gambar logo */
+    .login-container img {
+        width: 100px;
+        margin-bottom: 20px;
+    }
+
+    /* Judul di atas form */
+    .login-container h2 {
+        margin-bottom: 30px;
+        font-size: 1.5rem;
+        color: #000000;
+    }
+
+    /* Styling input */
+    .login-container input[type="text"],
+    .login-container input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 2px solid #e6e6e6;
+        border-radius: 10px;
+        font-size: 1rem;
+        background-color: #F8E3E1;
+        color: #333;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
+
+    /* Icon di dalam input */
+    .login-container .input-icon {
+        position: relative;
+    }
+
+    .login-container .input-icon img {
+        position: absolute;
+        left: 10px;
+        top: 24px;
+        width: 20px;
+    }
+
+    .login-container .input-icon input {
+        padding-left: 40px;
+    }
+
+    /* Tombol Masuk */
+    .login-container button {
+        background-color: #1A00FF;
+        color: white;
+        padding: 10px;
+        width: 100%;
+        border: none;
+        border-radius: 40px;
+        font-size: 1rem;
+        cursor: pointer;
+        margin-top: 20px;
+        font-family: "Poppins", sans-serif;
+    }
+
+    button:hover {
+        background-color: #1a54b8;
+    }
+</style>
+@endsection

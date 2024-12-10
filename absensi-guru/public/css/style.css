@@ -1,0 +1,285 @@
+/* public/css/style.css */
+
+* {
+    /* Beranda*/
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    /* Dashboard*/
+    margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #fdf6e3;
+    background-color: #fdf6e3;
+    background-color: #FFF9EB;
+    background-image: url('../images/BG2.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+
+    /*Login*/
+    font-family: "Poppins", sans-serif;
+        background-color: #FFF9EB;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 20px 40px;
+    position: absolute;
+    top: 0;
+    background-color: #fdf6e3;
+    background: transparent;
+}
+
+.logo {
+    height: 80px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.menu-link {
+    font-size: 18px;
+    color: #000;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.btn-login {
+    text-decoration: none;
+    padding: 10px 30px;
+    background-color: #1A00FF;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.content {
+    text-align: center;
+    margin-top: 150px;
+}
+
+
+h1,
+h2 {
+    font-weight: bold;
+    margin-right: 550px;
+}
+
+h1 {
+    font-size: 2em;
+    color: #000;
+}
+
+h2 {
+    font-size: 2em;
+    color: #000;
+    margin-bottom: 100px;
+    margin-right: 1060px;
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 230px;
+    background-color: #D6FBC5;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.logo {
+    width: 150px;
+    margin: 30px;
+    margin-bottom: 50px;
+}
+
+.nav-links {
+    list-style: none;
+    width: 100%;
+    padding: 0;
+}
+
+.nav-links li {
+    margin-bottom: 20px;
+    text-align: left;
+    margin-left: 30px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #000;
+    font-size: 18px;
+    font-weight: 520;
+    transition: color 0.3s;
+}
+
+.nav-links li a:hover {
+    color: #388E3C;
+    /* Warna hijau lebih gelap untuk hover */
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding: 50px;
+    background-color: #FFF9EB;
+    /* Warna hijau lebih terang di konten utama */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.main-content h1 {
+    margin-left: 70px;
+    font-size: 36px;
+    font-weight: 700;
+    color: #D6FBC5;
+    margin-bottom: 20px;
+}
+
+.main-content p {
+    font-size: 18px;
+    margin-left: 70px;
+    margin-bottom: 50px;
+    color: #000;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding: 5px;
+    background-color: #FFF9EB;
+    /* Warna hijau lebih terang di konten utama */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.welcome-box {
+    background-color: #D6FBC5;
+    /* Warna hijau latar belakang */
+    padding: 30px;
+    border-radius: 8px;
+    border: 2px solid #D6FBC5;
+    /* Border hitam */
+    width: 100%;
+    /* Sesuaikan dengan kebutuhan */
+    max-width: 600px;
+    /* Agar tidak terlalu lebar */
+    margin-bottom: 200px;
+    margin-left: 200px;
+}
+
+.welcome-box h1 {
+    font-size: 36px;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 10px;
+}
+
+.welcome-box p {
+    font-size: 18px;
+    color: #000;
+}
+
+* Container form login */ .login-container {
+    background-color: #D6FBC5;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 350px;
+}
+
+/* Gambar logo */
+.login-container img {
+    width: 100px;
+    margin-bottom: 20px;
+}
+
+/* Judul di atas form */
+.login-container h2 {
+    margin-bottom: 30px;
+    font-size: 1.5rem;
+    color: #000000;
+}
+
+/* Styling input */
+.login-container input[type="text"],
+.login-container input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 2px solid #e6e6e6;
+    border-radius: 10px;
+    font-size: 1rem;
+    background-color: #F8E3E1;
+    color: #333;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+/* Icon di dalam input */
+.login-container .input-icon {
+    position: relative;
+}
+
+.login-container .input-icon img {
+    position: absolute;
+    left: 10px;
+    top: 24px;
+    width: 20px;
+}
+
+.login-container .input-icon input {
+    padding-left: 40px;
+}
+
+/* Tombol Masuk */
+.login-container button {
+    background-color: #1A00FF;
+    color: white;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border-radius: 40px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 20px;
+    font-family: "Poppins", sans-serif;
+}
+
+button:hover {
+    background-color: #1a54b8;
+}

@@ -1,0 +1,115 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #FFF9EB;
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 230px;
+    background-color: #D6FBC5;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.logo {
+    width: 150px;
+    margin: 30px;
+    margin-bottom: 50px;
+}
+
+.nav-links {
+    list-style: none;
+    width: 100%;
+    padding: 0;
+}
+
+.nav-links li {
+    margin-bottom: 20px;
+    text-align: left;
+    margin-left: 30px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #000;
+    font-size: 18px;
+    font-weight: 520;
+    transition: color 0.3s;
+}
+
+.nav-links li a:hover {
+    color: #388E3C; /* Warna hijau lebih gelap untuk hover */
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding: 50px;
+    background-color:  #FFF9EB; /* Warna hijau lebih terang di konten utama */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.main-content h1 {
+    margin-left: 70px;
+    font-size: 36px;
+    font-weight: 700;
+    color: #D6FBC5;
+    margin-bottom: 20px;
+}
+
+.main-content p {
+    font-size: 18px;
+    margin-left: 70px;
+    margin-bottom: 50px;
+    color: #000;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding: 5px;
+    background-color:  #FFF9EB; /* Warna hijau lebih terang di konten utama */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.welcome-box {
+    background-color:#D6FBC5; /* Warna hijau latar belakang */
+    padding: 30px;
+    border-radius: 8px;
+    border: 2px solid #D6FBC5; /* Border hitam */
+    width: 100%; /* Sesuaikan dengan kebutuhan */
+    max-width: 600px; /* Agar tidak terlalu lebar */
+    margin-bottom: 200px;
+    margin-left: 200px;
+}
+
+.welcome-box h1 {
+    font-size: 36px;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 10px;
+}
+
+.welcome-box p {
+    font-size: 18px;
+    color: #000;
+}
+

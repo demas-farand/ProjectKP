@@ -1,0 +1,122 @@
+@extends('layouts.app')
+
+@section('title', 'Dashboard')
+
+@section('content')
+<div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <img src="{{ asset('images/logoSD.png') }}" alt="Logo Sekolah" class="logo">
+
+        <ul class="nav-links">
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Data Absensi</a></li>
+            <li><a href="#">Data Guru</a></li>
+            <li><a href="#">Pengaturan</a></li>
+            <li><a href="#">Logout</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="welcome-box">
+            <h1>Selamat Datang</h1>
+            <p>Di Website Absensi Guru</p>
+        </div>
+    </div>
+</div>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+        background-color: #FFF9EB;
+    }
+
+    .container {
+        display: flex;
+        min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+        width: 230px;
+        background-color: #D6FBC5;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* Align items to center */
+        text-align: center;
+    }
+
+    .logo {
+        width: 150px;
+        margin: 30px 0;
+        /* Center the logo vertically */
+    }
+
+    .nav-links {
+        list-style: none;
+        width: 100%;
+        padding: 0;
+    }
+
+    .nav-links li {
+        margin-bottom: 20px;
+        text-align: left;
+        margin-left: 30px;
+    }
+
+    .nav-links li a {
+        text-decoration: none;
+        color: #000;
+        font-size: 18px;
+        font-weight: 520;
+        transition: color 0.3s;
+    }
+
+    .nav-links li a:hover {
+        color: #388E3C;
+        /* Darker green for hover */
+    }
+
+    /* Main Content */
+    .main-content {
+        flex: 1;
+        padding: 50px;
+        background-color: #FFF9EB;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+    }
+
+    .welcome-box {
+        background-color: #D6FBC5;
+        padding: 30px;
+        border-radius: 8px;
+        border: 2px solid #D6FBC5;
+        width: 100%;
+        max-width: 600px;
+        margin-bottom: 200px;
+        margin-left: 70px;
+        /* Adjusted for better alignment */
+    }
+
+    .welcome-box h1 {
+        font-size: 36px;
+        font-weight: 700;
+        color: #000;
+        margin-bottom: 10px;
+    }
+
+    .welcome-box p {
+        font-size: 18px;
+        color: #000;
+    }
+</style>
+@endsection
