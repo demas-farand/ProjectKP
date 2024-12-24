@@ -1,46 +1,36 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('title', 'Create User')
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ asset('css/Dashboard/style.css') }}">
+    <!-- Google Fonts (Poppins) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&display=swap" rel="stylesheet">
+</head>
 
-@section('content')
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <img src="{{ asset('images/logoSD.png') }}" alt="Logo Sekolah" class="logo">
+            <ul class="nav-links">
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/absensi">Data Absensi</a></li>
+                <li><a href="/guru">Data Guru</a></li>
+                <li><a href="{{ route('settings.index') }}">Pengaturan</a></li>
+                <li><a href="/login">Logout</a></li>
+            </ul>
+        </div>
 
-<h2 class="mb-4 fw-bold">Create User</h2>
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="welcome-box">
+                <h1>Selamat Datang</h1>
+                <p>Di Website Absensi Guru</p>
+            </div>
+        </div>
+</body>
 
-<form action="{{ route('users.store') }}" method="POST">
-    @csrf
-    <!-- Input untuk Username -->
-    <div class="mb-3">
-        <label for="username" class="form-label">Username</label>
-        <input type="text" class="form-control" id="username" name="username" required>
-        @error('username')
-            <div class="error">{{ $message }}</div>
-        @enderror
-    </div>
-
-    <!-- Input untuk Password -->
-    <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
-        <input type="password" class="form-control" id="password" name="password" required>
-        @error('password')
-            <div class="error">{{ $message }}</div>
-        @enderror
-    </div>
-
-    <!-- Dropdown untuk Role -->
-    <div class="mb-3">
-        <label for="role_id" class="form-label">Role</label>
-        <select class="form-control" id="role_id" name="role_id" required>
-            <option value="">Select Role</option>
-            @foreach($roles as $role)
-                <option value="{{ $role->id }}">{{ $role->name }}</option>
-            @endforeach
-        </select>
-        @error('role_id')
-            <div class="error">{{ $message }}</div>
-        @enderror
-    </div>
-
-    <button type="submit" class="btn btn-primary">Create User</button>
-</form>
-
-@endsection
+</html>

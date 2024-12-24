@@ -43,25 +43,25 @@
 
 <body>
     <div class="content">
-        <h1>Edit Teacher</h1>
-        <form action="{{ route('absensi.guru.update', $teacher->id) }}" method="POST">
+        <h1>Edit Guru</h1>
+        <form action="{{ route('absensi.guru.update', $guru->id) }}" method="POST">
             @csrf
             @method('PUT')
             <div class="form-group">
                 <label for="name">Name:</label>
-                <input type="text" id="name" name="name" value="{{ $teacher->name }}" required>
+                <input type="text" id="name" name="name" value="{{ $guru->nama }}" required>
             </div>
             <div class="form-group">
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email" value="{{ $teacher->email }}" required>
+                <input type="email" id="email" name="email" value="{{ $guru->email }}" required>
             </div>
             <div class="form-group">
                 <label for="phone_number">Phone Number:</label>
-                <input type="text" id="phone_number" name="phone_number" value="{{ $teacher->phone_number }}" required>
+                <input type="text" id="phone_number" name="phone_number" value="{{ $guru->no_telp }}" required>
             </div>
             <div class="form-group">
                 <label for="subject">Subject:</label>
-                <input type="text" id="subject" name="subject" value="{{ $teacher->subject }}" required>
+                <input type="text" id="subject" name="subject" value="{{ $guru->mata_pelajaran }}" required>
             </div>
             <button type="submit">Update</button>
         </form>

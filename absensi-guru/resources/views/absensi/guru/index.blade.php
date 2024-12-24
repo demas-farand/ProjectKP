@@ -19,7 +19,6 @@
             <span><a href="{{ route('dashboard') }}">Dashboard</a> > Data Guru</span>
         </div>
     </div>
-
     <div class="content">
         <h1>Data Guru</h1>
         <div class="search-filter">
@@ -34,11 +33,9 @@
                 </form>
             </div>
         </div>
-
         <div style="margin-bottom: 20px;">
             <a href="{{ route('absensi.guru.create') }}" class="btn btn-create">Buat Data Guru Baru</a>
         </div>
-
         <table class="table-guru">
             <thead>
                 <tr>
@@ -48,26 +45,31 @@
                     <th>No-telp</th>
                     <th>Mata Pelajaran</th>
                     <th>Action</th>
+                    <th>QR Code</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($teachers as $index => $teacher)
+                @foreach($guru as $index => $g)
                     <tr>
                         <td>{{ $index + 1 }}</td>
-                        <td>{{ $teacher->name }}</td>
-                        <td>{{ $teacher->email }}</td>
-                        <td>{{ $teacher->phone_number }}</td>
-                        <td>{{ $teacher->subject }}</td>
+                        <td>{{ $g->nama }}</td>
+                        <td>{{ $g->email }}</td>
+                        <td>{{ $g->no_telp }}</td>
+                        <td>{{ $g->mata_pelajaran }}</td>
                         <td>
-                            <a href="{{ route('absensi.guru.edit', $teacher->id) }}" class="btn btn-edit">Edit</a>
-                            <form action="{{ route('absensi.guru.destroy', $teacher->id) }}" method="POST"
+                            <a href="{{ route('absensi.guru.edit', $g->id) }}" class="btn btn-edit">Edit</a>
+                            <form action="{{ route('absensi.guru.destroy', $g->id) }}" method="POST"
                                 style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-delete"
                                     onclick="return confirm('Are you sure?')">Delete</button>
                             </form>
-                            <button class="btn btn-absen" onclick="absenTeacher({{ $teacher->id }})">Absen</button>
+                        </td>
+                        <td>
+                            <form action="{{ url('/guru/generate-qrcode/' . $g->id) }}" method="GET" target="_blank">
+                                <button type="submit" class="btn btn-qrcode">Generate QR Code</button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach

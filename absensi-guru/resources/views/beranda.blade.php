@@ -13,7 +13,7 @@
     <header class="header">
         <img src="/images/logoSD.png" alt="Logo Sekolah" class="logo">
         <nav>
-            <a href="#" class="menu-link">Beranda</a>
+            <a href="/beranda" class="menu-link">Beranda</a>
             <a href="/login" class="btn-login">Masuk</a>
         </nav>
     </header>

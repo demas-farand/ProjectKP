@@ -4,39 +4,82 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Role;
-use Illuminate\Support\Facades\Hash;
-
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
-    public function create()
+    public function index()
     {
-        // Mengambil semua role untuk ditampilkan di dropdown
+        $users = User::with('roles')->get();
         $roles = Role::all();
-        return view('role.create', compact('roles'));
+        return view('settings.index', compact('users', 'roles'));
     }
 
-    // Menyimpan user baru ke database
+    public function create()
+    {
+        $roles = Role::all();
+        return view('users.create', compact('roles'));
+    }
+
     public function store(Request $request)
     {
-        // Validasi input
         $request->validate([
-            'username' => 'required|string|max:255|unique:users,username',
-            'password' => 'required|string|min:8',
-            'role_id' => 'required|exists:roles,id',
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'username' => 'required|unique:users,username',
+            'password' => 'required|min:6',
+            'role' => 'required'
         ]);
 
-        // Membuat user baru
         $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
             'username' => $request->username,
-            'password' => Hash::make($request->password), // Hash password sebelum disimpan
+            'password' => bcrypt($request->password),
         ]);
 
-        // Menyimpan role yang dipilih untuk user
-        $user->roles()->attach($request->role_id);
+        $user->assignRole($request->role);
 
-        // Redirect ke halaman pengaturan dengan pesan sukses
-        return redirect()->route('pengaturan')->with('success', 'User created successfully');
+        return redirect()->route('users.index')->with('success', 'User created successfully.');
+    }
+
+    public function edit($id)
+    {
+        $user = User::findOrFail($id);
+        $roles = Role::all();
+        return view('users.edit', compact('user', 'roles'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,' . $id,
+            'username' => 'required|unique:users,username,' . $id,
+            'role' => 'required'
+        ]);
+
+        $user = User::findOrFail($id);
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'username' => $request->username,
+        ]);
+
+        if ($request->filled('password')) {
+            $user->update(['password' => bcrypt($request->password)]);
+        }
+
+        $user->syncRoles($request->role);
+
+        return redirect()->route('users.index')->with('success', 'User updated successfully.');
+    }
+
+    public function destroy($id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return redirect()->route('users.index')->with('success', 'User deleted successfully.');
     }
 }

@@ -3,86 +3,55 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Role;
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
-
     public function index()
     {
         $roles = Role::all();
-        return view('pengaturan', compact('roles'));
+        return view('settings.index', compact('roles'));
     }
 
-    // Menampilkan form untuk membuat role baru
-    public function createRole()
+    public function create()
     {
-        return view('role.createRole');
+        return view('roles.create');
     }
 
-    public function storeRole(Request $request)
-    {
-        $request->validate([
-            'role_name' => 'required|string|max:255|unique:roles,name',
-        ]);
-
-        Role::create(['name' => $request->role_name]);
-
-        return redirect()->route('pengaturan')->with('success', 'Role created successfully');
-    }
-
-    public function edit(Role $role)
-    {
-        // Menampilkan form edit role
-        return view('role.edit', compact('role'));
-    }
-
-    public function update(Request $request, Role $role)
+    public function store(Request $request)
     {
         $request->validate([
-            'role_name' => 'required|string|max:255|unique:roles,name,' . $role->id,
+            'name' => 'required|unique:roles,name',
         ]);
 
-        $role->update(['name' => $request->role_name]);
+        Role::create(['name' => $request->name, 'guard_name' => 'web']);
 
-        return redirect()->route('pengaturan')->with('success', 'Role updated successfully');
+        return redirect()->route('roles.index')->with('success', 'Role created successfully.');
     }
 
-    // Menampilkan form untuk membuat user baru dengan role
-    public function createUser()
+    public function edit($id)
     {
-        // Mengambil semua role dari database
-        $roles = Role::all();
-
-        // Mengirimkan data roles ke view
-        return view('role.create', compact('roles'));
+        $role = Role::findOrFail($id);
+        return view('roles.edit', compact('role'));
     }
 
-    // Menyimpan user baru ke database
-    public function storeUser(Request $request)
+    public function update(Request $request, $id)
     {
-        // Validasi input
         $request->validate([
-            'username' => 'required|string|max:255|unique:users,username',
-            'password' => 'required|string|min:8',
-            'role_id' => 'required|exists:roles,id',
+            'name' => 'required|unique:roles,name,' . $id,
         ]);
 
-        // Membuat user baru
-        $user = User::create([
-            'username' => $request->username,
-            'password' => Hash::make($request->password),
-        ]);
+        $role = Role::findOrFail($id);
+        $role->update(['name' => $request->name]);
 
-        // Menyimpan role yang dipilih untuk user
-        $user->roles()->attach($request->role_id);
-
-        // Redirect ke halaman pengaturan dengan pesan sukses
-        return redirect()->route('pengaturan')->with('success', 'User created successfully');
+        return redirect()->route('roles.index')->with('success', 'Role updated successfully.');
     }
 
+    public function destroy($id)
+    {
+        $role = Role::findOrFail($id);
+        $role->delete();
 
-
+        return redirect()->route('roles.index')->with('success', 'Role deleted successfully.');
+    }
 }

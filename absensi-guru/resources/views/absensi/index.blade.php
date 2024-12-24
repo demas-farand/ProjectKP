@@ -8,6 +8,7 @@
     <title>Data Absensi</title>
     <link href="{{ asset('css/Absensi/style.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
 
 <body>
     <div class="header">
@@ -18,7 +19,6 @@
             <span><a href="{{ route('dashboard') }}">Dashboard</a> > Data Absensi</span>
         </div>
     </div>
-
     <div class="content">
         <h1>Data Absensi</h1>
         <div class="search-filter">
@@ -30,67 +30,39 @@
                 <input type="text" id="search" name="search">
             </div>
         </div>
-
         <table class="table-absensi">
             <thead>
                 <tr>
                     <th>No</th>
                     <th>Nama Guru</th>
-                    <th>Tanggal</th>
+                    <th>Mata Pelajaran</th>
+                    <th>Lokasi</th>
                     <th>Jam Masuk</th>
                     <th>Jam Keluar</th>
-                    <th>Status Absensi</th>
                     <th>Keterangan</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($attendance as $index => $absen)
-                    <tr>
-                        <td>{{ $index + 1 }}</td>
-                        <td>{{ $absen->teacher->name }}</td>
-                        <td>{{ $absen->date }}</td>
-                        <td>{{ $absen->check_in_time }}</td>
-                        <td>{{ $absen->check_out_time ?? '-' }}</td>
-                        <td>{{ $absen->status }}</td>
-                        <td>{{ $absen->remarks }}</td>
-                    </tr>
+                @foreach($absensi as $index => $absen)
+                    @if($absen)
+                        <tr>
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ $absen->guru->name }}</td>
+                            <td>{{ $absen->mata_pelajaran }}</td>
+                            <td>{{ $absen->lokasi }}</td>
+                            <td>{{ $absen->jam_masuk }}</td>
+                            <td>{{ $absen->jam_keluar ?? '-' }}</td>
+                            <td>{{ $absen->keterangan }}</td>
+                        </tr>
+                    @else
+                        <tr>
+                            <td colspan="7">Data tidak tersedia</td>
+                        </tr>
+                    @endif
                 @endforeach
             </tbody>
         </table>
     </div>
 </body>
-<script>
-    document.getElementById('search').addEventListener('input', function () {
-        const searchValue = this.value;
-
-        fetch(`/absensi?search=${searchValue}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                const tbody = document.querySelector('.table-absensi tbody');
-                tbody.innerHTML = '';
-
-                data.absensi.forEach((absen, index) => {
-                    const row = `<tr>
-                    <td>${index + 1}</td>
-                    <td>${absen.teacher.name}</td>
-                    <td>${absen.date}</td>
-                    <td>${absen.check_in_time}</td>
-                    <td>${absen.check_out_time || '-'}</td>
-                    <td>${absen.status}</td>
-                    <td>${absen.remarks}</td>
-                </tr>`;
-                    tbody.innerHTML += row;
-                });
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-                alert('Terjadi kesalahan saat mengambil data.');
-            });
-</script>
 
 </html>

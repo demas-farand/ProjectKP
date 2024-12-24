@@ -15,14 +15,22 @@
 
         <!-- Judul Form -->
         <h2>Sistem Absensi Guru</h2>
-
+        @if($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $item)
+                        <li>{{ $item }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <!-- Form Login -->
-        <form action="{{ route('login.submit') }}" method="POST">
+        <form action="{{ route('login') }}" method="POST">
             @csrf
 
             <!-- Input untuk Username -->
             <div class="input-icon">
-                <img src="{{ asset('images/username.png') }}" alt="Icon User">
+                <img src="{{ asset('images/username.png') }}" alt="Icon Username">
                 <input type="text" name="username" placeholder="Username" required>
                 @error('username')
                     <div class="error">{{ $message }}</div>
@@ -32,18 +40,11 @@
             <!-- Input untuk Password -->
             <div class="input-icon">
                 <img src="{{ asset('images/password4.png') }}" alt="Icon Password">
-                <input type="password" name="password" placeholder="Password" required>
+                <input type="password" name="password" class="form-control" placeholder="Password" required>
                 @error('password')
-                    <div class="error">{{ $message }}</div>
+                    <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
-
-            <!-- Pesan Error Umum -->
-            @if($errors->any())
-                <div class="error">
-                    {{ $errors->first() }}
-                </div>
-            @endif
 
             <!-- Tombol Masuk -->
             <button type="submit">Masuk</button>

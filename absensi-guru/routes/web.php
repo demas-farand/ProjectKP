@@ -1,15 +1,20 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\absensi\TeacherController;
-use App\Http\Controllers\absensi\AttendanceController;
+use App\Http\Controllers\absensi\GuruController;
+use App\Http\Controllers\absensi\AbsensiController;
 use App\Http\Middleware\VerifyAPIToken;
 use App\Http\Controllers\Login\LoginController;
-use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SesiController;
 use App\Http\Controllers\User;
 //use App\Http\Controllers\UserController;
+use App\Http\Controllers\QRCodeController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AbsensiApiController;
 
-
+Route::get('/admin', function () {
+})->middleware('role:admin');
 
 Route::get('/', function () {
     return view('beranda');
@@ -17,9 +22,10 @@ Route::get('/', function () {
 
 Route::get('/login', function () {
     return view('login.login');
-});
+})->name('login');
 
-Route::post('/login', [LoginController::class, 'submit'])->name('login.submit');
+//Route::post('/login', [LoginController::class, 'submit'])->name('login.submit');
+Route::post('/login', [SesiController::class, 'login'])->name('login]');
 
 Route::get('/beranda', function () {
     return view('beranda');
@@ -41,39 +47,36 @@ Route::get('/pengaturan', function () {
     return view('pengaturan');
 })->name('pengaturan');
 
-
-Route::get('/pengaturan', [RoleController::class, 'index'])->name('pengaturan');
-Route::get('/pengaturan', [RoleController::class, 'index'])->name('pengaturan');
-
 //Crud Guru
-Route::get('/guru', [TeacherController::class, 'index'])->name('absensi.guru.index');
-Route::get('/guru/create', [TeacherController::class, 'create'])->name('absensi.guru.create');
-Route::post('/guru', [TeacherController::class, 'store'])->name('absensi.guru.store');
-Route::get('/guru/{id}', [TeacherController::class, 'show'])->name('absensi.guru.show');
-Route::get('/guru/{id}/edit', [TeacherController::class, 'edit'])->name('absensi.guru.edit');
-Route::put('/guru/{id}', [TeacherController::class, 'update'])->name('absensi.guru.update');
-Route::delete('/guru/{id}', [TeacherController::class, 'destroy'])->name('absensi.guru.destroy');
+Route::get('/guru', [GuruController::class, 'index'])->name('absensi.guru.index');
+Route::get('/guru/create', [GuruController::class, 'create'])->name('absensi.guru.create');
+Route::post('/guru', [GuruController::class, 'store'])->name('absensi.guru.store');
+Route::get('/guru/{id}', [GuruController::class, 'show'])->name('absensi.guru.show');
+Route::get('/guru/{id}/edit', [GuruController::class, 'edit'])->name('absensi.guru.edit');
+Route::put('/guru/{id}', [GuruController::class, 'update'])->name('absensi.guru.update');
+Route::delete('/guru/{id}', [GuruController::class, 'destroy'])->name('absensi.guru.destroy');
 
 //Test API
-Route::post('/guru/{id}/absen', [TeacherController::class, 'absen'])->name('absensi.guru.absen');
-Route::get('/absensi', [AttendanceController::class, 'index'])->name('absensi.index');
+Route::post('/guru/{id}/absen', [GuruController::class, 'absen'])->name('absensi.guru.absen');
+Route::get('/absensi', [AbsensiController::class, 'index'])->name('absensi.index');
+
+Route::get('/generate-qrcode/{id}', [QRCodeController::class, 'generateQRCode']);
+Route::post('/mobile-check-in', [AbsensiController::class, 'mobileCheckIn']);
+
+Route::get('/guru/generate-qrcode/{id}', [GuruController::class, 'generateQRCode'])->name('guru.generate-qrcode');
+
+// Routes untuk Absensi
+Route::get('/absensi', [AbsensiController::class, 'index'])->name('absensi.index');
+Route::post('/absensi/check-in', [AbsensiController::class, 'checkIn'])->name('absensi.check-in');
+Route::post('/absensi/check-out', [AbsensiController::class, 'checkOut'])->name('absensi.check-out');
+
+//Role
+Route::resource('roles', RoleController::class);
+Route::resource('users', UserController::class);
+Route::get('/settings', [UserController::class, 'index'])->name('settings.index');
 
 
-// Rute untuk menampilkan form pembuatan user baru
-Route::get('/role/create', [RoleController::class, 'createUser'])->name('role.createUser');
 
-// Rute untuk menyimpan user baru
-Route::post('/role/store', [RoleController::class, 'storeUser'])->name('role.storeUser');
 
-// Rute untuk menampilkan form pembuatan role baru
-Route::get('/role/createRole', [RoleController::class, 'createRole'])->name('role.createRole');
 
-// Rute untuk menyimpan role baru
-Route::post('/role/storeRole', [RoleController::class, 'storeRole'])->name('role.storeRole');
-
-// Rute untuk menampilkan form edit role
-Route::get('/role/{role}/edit', [RoleController::class, 'edit'])->name('role.edit');
-
-// Rute untuk memperbarui role
-Route::put('/role/{role}', [RoleController::class, 'update'])->name('role.update');
-Route::delete('/role/{role}', [RoleController::class, 'destroy'])->name('role.destroy');
+Route::post('/absensi', [AbsensiApiController::class, 'store']);
